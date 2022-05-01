@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 
-const db = new Sequelize('partialMcLuhan', 'thisApp', process.env.POSTGRES_PASSWORD, {
+const db = new Sequelize('particleMcLuhan', 'thisApp', process.env.POSTGRES_PASSWORD, {
   host: 'localhost',
   dialect: 'postgres',
   logging: false
