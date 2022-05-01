@@ -1,4 +1,4 @@
-const {db, User} = require('../server/database')
+const {db, User} = require('./database')
 
 
 const seed = async () => {

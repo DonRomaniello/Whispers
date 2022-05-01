@@ -14,7 +14,7 @@ export default function Root() {
   });
 
   function runEvery(mousePos) {
-    console.log("harekrishna", mousePos)
+    // console.log("harekrishna", mousePos)
   }
 
   runEvery(mouse.x);
