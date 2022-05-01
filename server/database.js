@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize')
 
-const db = new Sequelize('particle_mcluhan', 'thisApp', process.env.POSTGRES_PASSWORD, {
+const db = new Sequelize('particle_mcluhan', 'thisapp', process.env.POSTGRES_PASSWORD, {
   host: 'localhost',
   dialect: 'postgres',
   logging: false
@@ -17,3 +17,4 @@ module.exports = {
   db,
   User
 };
+
