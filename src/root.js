@@ -1,5 +1,6 @@
 import * as React from 'react'
 import useMouse from '@react-hook/mouse-position'
+import axios from 'axios';
 
 export default function Root() {
 
@@ -12,10 +13,13 @@ export default function Root() {
     leaveDelay: 100
   });
 
-  // const mousePositon =
+  function runEvery(mousePos) {
+    console.log("harekrishna", mousePos)
+  }
+
+  runEvery(mouse.x);
 
   return (
-    console.log("here")
     <div ref={target} style={{width: "100%", height: "100%"}}>
       <div class="demo" style={{top:mouse.y - 100, left:mouse.x - 100}}>
         <div>Demo</div>
