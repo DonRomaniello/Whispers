@@ -1,7 +1,7 @@
-#demo {
+.demo {
   position: absolute;
-  top: 40px;
-  left: 40px;
+  /* top: 40px;
+  left: 40px; */
   background-color: gainsboro;
   width: 100px;
   height: 100px;
