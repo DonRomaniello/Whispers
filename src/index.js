@@ -8,11 +8,13 @@ import Peer from 'simple-peer';
 
 function Root() {
 
-    const [mess, setMess] = useState(1)
+    const [peerArray, setPeers] = useState([]);
+
+    const [offerArray, setOffers] = useState([]);
+
+    const [offered, offerSent] = useState(false);
 
     const myPeer = new Peer({ initiator: true })
-
-    const peerArray = useState([]);
 
     async function sendOffer(offer){
         try {
@@ -23,59 +25,69 @@ function Root() {
     }
 
     useEffect(() => {
-        setMess(mess + 1)
 
-        myPeer.on('signal', data => {
-            if (data.type === 'offer') {
-                sendOffer(data);
-            }
-        })
-      }, [])
-
+      myPeer.on('signal', data => {
+        if (data.type === 'offer') {
+          sendOffer(data);
+          offerSent(true);
+        }
+      })
+    }, [])
 
     useEffect(() => {
 
+      console.log("Offer state changed.")
 
 
+    }, offered)
 
-
-      async function getAnswers(offer){
-        try {
-            let answers = await axios.get('api/answers')
-        } catch (err){
-            console.log(err)
-        }
+    async function getOffers(){
+      try {
+        const offers = await axios.get('api/offers')
+        setOffers(offers);
+      } catch (err){
+        console.log(err)
+      }
     }
 
-
+    useEffect(() => {
 
     })
 
+    async function getAnswers(){
+      try {
+        let answers = await axios.get('api/answers')
+        return answers;
+      } catch (err){
+        console.log(err)
+      }
+    }
+
+      const target = React.useRef(null);
+
+      const mouse = useMouse(target, {
+        enterDelay: 0,
+        leaveDelay: 100,
+        fps: 15
+      });
 
 
-    //   useEffect(() => {
-    //     setMess(mess + 1)
-    //   })
+      // This
+      function runEvery(mousePos) {
+        // console.log("harekrishna", mousePos)
+        console.log("mouse moving.")
+      }
 
-  const target = React.useRef(null);
+      // This will run on every movement of mouse.
+      runEvery(mouse.x);
 
-  const mouse = useMouse(target, {
-    fps: 15,
-    enterDelay: 0,
-    leaveDelay: 100
-  });
 
-  function runEvery(mousePos) {
-    // console.log("harekrishna", mousePos)
-    //console.log("running")
-  }
 
-  runEvery(mouse.x);
 
   return (
     <div ref={target} style={{width: "100%", height: "100%"}}>
       <div class="demo" style={{top:mouse.y - 100, left:mouse.x - 100}}>
-        <div>{mess}</div>
+        <div></div>
       </div>
     </div>
   );
