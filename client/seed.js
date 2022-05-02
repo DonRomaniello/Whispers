@@ -1,13 +1,13 @@
-const {db, User} = require('./database')
+const { db, Offer, Answer } = require('./database')
 
 
 const seed = async () => {
 
   await db.sync({force: true})
 
-  const example = await User.create({token: {example: "really"}})
+  const offerExample = await Offer.create({token: {example: "this is an offer"}})
 
-  console.log(example)
+  const answerExample = await Answer.create({token: {example: "this is an answer"}})
 
 }
 

@@ -3,7 +3,7 @@ const app = express()
 const port = 3000
 const path = require('path');
 require('dotenv').config()
-const { db, User } = require('./client/database')
+const { db, User, Answer, Offer } = require('./client/database')
 
 app.use(express.json());
 
@@ -19,13 +19,30 @@ app.get('/api/users', async(req, res, next) => {
   }
 })
 
-app.post('/api/users', async(req, res, next) => {
+app.post('/api/offers', async(req, res, next) => {
   try {
     console.log("Reading:", req.body)
-    const connectionToken = await User.create(req.body)
-    console.log(connectionToken)
-    res.send(connectionToken)
+    const offer = await Offer.create(req.body)
+    res.send(offer)
   } catch (err){
+    next(err)
+  }
+})
+
+app.get('/api/offers', async(req, res, next) => {
+  try {
+    const existingOffers = await Offer.findAll({attributes: ['token']})
+    res.send(existingOffers)
+  } catch (err) {
+    next(err)
+  }
+})
+
+app.get('/api/answers', async(req, res, next) => {
+  try {
+    const answers = await Answer.findAll()
+    res.send(answers)
+  } catch (err) {
     next(err)
   }
 })

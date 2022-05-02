@@ -16,7 +16,8 @@ function Root() {
 
         async function sendToken(offer){
             try {
-                await axios.post('api/users', {token : offer})
+                const answers = await axios.post('api/users', {token : offer})
+                return answers
             } catch (err){
                 console.log(err)
             }
@@ -25,7 +26,8 @@ function Root() {
         peer1.on('signal', data => {
             if (data.type === 'offer') {
                 console.log("reaching")
-                sendToken(data);
+                let answers = sendToken(data);
+                console.log(answers)
             }
         })
 
