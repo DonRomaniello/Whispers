@@ -10,29 +10,48 @@ function Root() {
 
     const [mess, setMess] = useState(1)
 
+    const myPeer = new Peer({ initiator: true })
+
+    const peerArray = useState([]);
+
+    async function sendOffer(offer){
+        try {
+            await axios.post('api/offers', {token : offer})
+        } catch (err){
+            console.log(err)
+        }
+    }
+
     useEffect(() => {
         setMess(mess + 1)
-        let peer1 = new Peer({ initiator: true })
 
-        async function sendToken(offer){
-            try {
-                const answers = await axios.post('api/users', {token : offer})
-                return answers
-            } catch (err){
-                console.log(err)
-            }
-        }
-
-        peer1.on('signal', data => {
+        myPeer.on('signal', data => {
             if (data.type === 'offer') {
-                console.log("reaching")
-                let answers = sendToken(data);
-                console.log(answers)
+                sendOffer(data);
             }
         })
-
-
       }, [])
+
+
+    useEffect(() => {
+
+
+
+
+
+      async function getAnswers(offer){
+        try {
+            let answers = await axios.get('api/answers')
+        } catch (err){
+            console.log(err)
+        }
+    }
+
+
+
+    })
+
+
 
     //   useEffect(() => {
     //     setMess(mess + 1)
