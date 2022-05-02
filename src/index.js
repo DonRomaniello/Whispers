@@ -10,9 +10,6 @@ function Root() {
 
     const [mess, setMess] = useState(1)
 
-    // const [offer, setOffer] = useState({})
-
-
     useEffect(() => {
         setMess(mess + 1)
         let peer1 = new Peer({ initiator: true })
