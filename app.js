@@ -17,6 +17,17 @@ app.get('/api/users', async(req, res, next) => {
   }
 })
 
+app.post('/api/users', async(req, res, next) => {
+  try {
+    console.log("Reading.")
+    const connectionToken = await User.create(req.body)
+    console.log(connectionToken)
+    res.send(connectionToken)
+  } catch (err){
+    next(err)
+  }
+})
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, './public/index.html'))
 })

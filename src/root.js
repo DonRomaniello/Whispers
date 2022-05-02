@@ -1,9 +1,7 @@
 import * as React from 'react'
 import useMouse from '@react-hook/mouse-position'
-import axios from 'axios';
 
-export default function Root() {
-
+export default function Root(props) {
 
   const target = React.useRef(null);
 
@@ -15,6 +13,7 @@ export default function Root() {
 
   function runEvery(mousePos) {
     // console.log("harekrishna", mousePos)
+    console.log("running")
   }
 
   runEvery(mouse.x);

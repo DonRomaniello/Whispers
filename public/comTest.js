@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 var peer1 = new SimplePeer({ initiator: true })
 var peer2 = new SimplePeer()
 
