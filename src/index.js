@@ -34,21 +34,26 @@ function Root() {
       })
     }, [])
 
-    useEffect(() => {
-
-      console.log("Offer state changed.")
-
-
-    }, offered)
-
     async function getOffers(){
       try {
-        const offers = await axios.get('api/offers')
-        setOffers(offers);
+        const offers = await axios.get('api/offers');
+        return offers
       } catch (err){
         console.log(err)
       }
     }
+
+    useEffect(async () => {
+
+      let offers = await getOffers();
+      setOffers(offers.data)
+      console.log(offerArray);
+
+
+      // console.log("Offer state changed.")
+
+
+    }, offered)
 
     useEffect(() => {
 
@@ -75,7 +80,8 @@ function Root() {
       // This
       function runEvery(mousePos) {
         // console.log("harekrishna", mousePos)
-        console.log("mouse moving.")
+        // console.log("mouse moving.")
+        // console.log(offerArray)
       }
 
       // This will run on every movement of mouse.
