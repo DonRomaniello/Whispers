@@ -3,21 +3,36 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import useMouse from '@react-hook/mouse-position';
 import axios from 'axios';
+import Peer from 'simple-peer';
+
 
 function Root() {
 
     const [mess, setMess] = useState(1)
 
+    // const [offer, setOffer] = useState({})
+
+
     useEffect(() => {
         setMess(mess + 1)
+        let peer1 = new Peer({ initiator: true })
 
-        async function setToken() {
-            let token = {token: {example: 'really2'}}
-            console.log(token)
-            const tokenMade = await axios.post('api/users', {token})
-            return tokenMade
-          }
-        setToken();
+        async function sendToken(offer){
+            try {
+                await axios.post('api/users', {token : offer})
+            } catch (err){
+                console.log(err)
+            }
+        }
+
+        peer1.on('signal', data => {
+            if (data.type === 'offer') {
+                console.log("reaching")
+                sendToken(data);
+            }
+        })
+
+
       }, [])
 
     //   useEffect(() => {
