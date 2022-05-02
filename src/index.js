@@ -1,8 +1,8 @@
 // import * as React from 'react';
 import React, { useState, useEffect } from 'react';
-
 import ReactDOM from 'react-dom';
 import useMouse from '@react-hook/mouse-position';
+import axios from 'axios';
 
 function Root() {
 
@@ -10,7 +10,19 @@ function Root() {
 
     useEffect(() => {
         setMess(mess + 1)
+
+        async function setToken() {
+            let token = {token: {example: 'really2'}}
+            console.log(token)
+            const tokenMade = await axios.post('api/users', {token})
+            return tokenMade
+          }
+        setToken();
       }, [])
+
+    //   useEffect(() => {
+    //     setMess(mess + 1)
+    //   })
 
   const target = React.useRef(null);
 

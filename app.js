@@ -5,6 +5,8 @@ const path = require('path');
 require('dotenv').config()
 const { db, User } = require('./client/database')
 
+app.use(express.json());
+
 app.use(express.static('public'));
 
 app.get('/api/users', async(req, res, next) => {
@@ -19,7 +21,7 @@ app.get('/api/users', async(req, res, next) => {
 
 app.post('/api/users', async(req, res, next) => {
   try {
-    console.log("Reading.")
+    console.log("Reading:", req.body)
     const connectionToken = await User.create(req.body)
     console.log(connectionToken)
     res.send(connectionToken)
